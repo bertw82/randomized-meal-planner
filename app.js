@@ -21,7 +21,8 @@ const meals = [
             'Drain egg noodles. Mix together all ingredients except fried onion rings. Put in a casserole dish or a 9"x13"x2" pan. Cook for 20 minutes.',
             'Sprinkle fried onion topping on top of baked casserole. Bake for an additional 3 minutes, or until fried onion is slightly brown.',
             'Let cool for 5 minutes and serve.'
-        ]
+        ],
+        index: 0
     },
     {
         name: 'Macaroni and Cheese',
@@ -38,7 +39,8 @@ const meals = [
             'Add 4 cups of heated milk and stir until smooth to complete the white sauce.',
             'Add cheese and cayenne pepper.',
             'Finally, mix with a pot of cooked pasta.'
-        ]
+        ],
+        index: 1
     },
     {
         name: 'Spaghetti Carbonara',
@@ -60,7 +62,8 @@ const meals = [
             'Add tomato sauce and heat through.',
             'Remove from heat, add Parmesan cheese, and serve immediately over spaghetti.',
             'May garnish with additional Parmesan cheese.'
-        ]
+        ],
+        index: 2
     },
     {
         name: 'Hamburger',
@@ -78,7 +81,8 @@ const meals = [
             'Let the burger rest for several minutes before serving to let the juices cool down and not burst out at first bite.',
             'Ensure your burgers are fully cooked through before serving. If your burgers are quite thick or if you are unsure, you can cut one open to ensure the insides are browned. If the insides are red, there is a chance that the meat is not fully cooked. Alternately, you can insert a meat thermometer into the center of the burger, if the temperature reads less than 71°C (160°F), your burger is undercooked.',
             'Serve each burger on a bun.'
-        ]
+        ],
+        index: 3
     },
     {
         name: 'Chicken Soup',
@@ -102,7 +106,8 @@ const meals = [
             'Heat oil in a large pot over medium low heat. Add garlic, onion, celery, carrot, and a pinch of salt and cook until onion is translucent. Avoid browning if you wish to keep the soup lighter in color.',
             'Add remaining ingredients and bring to a boil over medium high heat. Reduce heat to a simmer, cover, and cook 30 minutes.',
             'Remove herbs (if you wish) and check for taste. Season with salt and pepper to taste before serving.'
-        ]
+        ],
+        index: 4
     },
     {
         name: 'Red beans and rice',
@@ -125,7 +130,8 @@ const meals = [
             'Remove a significant fraction of liquid from pan, add drained beans, add back just enough liquid to cover beans. Simmer beans until they just begin to break up and liquid starts to become creamy, about 45 minutes. Stir frequently. Add back liquid as needed to keep beans covered.',
             'If beans begin to scorch, do not stir, transfer mixture to another pan without scraping scorched beans into new pot.',
             'Add ham hocks, cook 45 minutes more, SERVE IMMEDIATELY'
-        ]
+        ],
+        index: 5
     },
     {
         name: 'Quiche',
@@ -145,7 +151,8 @@ const meals = [
             'In the pie crust, create alternating layers of the shredded cheese and the mixture from the blender until the crust is full',
             'Bake the quiche for 35-40 minutes; a toothpick or fork inserted into its middle should come out "clean"',
             'Remove the quiche from the oven and let it cool for at least 20 minutes before serving'
-        ]
+        ],
+        index: 6
     }
 ]; 
 
@@ -159,16 +166,34 @@ const getDay = () => {
 
 const getRandomWeeklyMeals = () => {
     const randomMeal = meals[Math.floor(Math.random() * meals.length)];
-    return randomMeal.name;
+    return randomMeal;
 };
 
 const displayWeeklyMealPlan = () => {
     for (let i = 0; i < 7; i++) {
         const meal = getRandomWeeklyMeals();
-        const li = document.createElement('li');
-        li.innerHTML = meal;
-        li.className = 'meal-item';
-        mealList.appendChild(li);
+        const liMain = document.createElement('li');
+        // const ul1 = document.createElement('ul');
+        // const ul2 = document.createElement('ul');
+        // ul1.className = 'hidden';
+        // ul2.className = 'hidden';
+   
+        liMain.setAttribute('data-index', meal.index);
+        liMain.innerHTML = meal.name;
+        liMain.className = 'meal-item';
+        mealList.appendChild(liMain);
+        // liMain.appendChild(ul1);
+        // liMain.appendChild(ul2);
+        // for (let i = 0; i < meal.ingredients.length; i++) {
+        //     const liSecondary = document.createElement('li');
+        //     liSecondary.innerHTML = meal.ingredients[i];
+        //     ul1.appendChild(liSecondary);
+        // }
+        // for (let i = 0; i < meal.instructions.length; i++) {
+        //     const liSecondary = document.createElement('li');
+        //     liSecondary.innerHTML = meal.instructions[i];
+        //     ul2.appendChild(liSecondary);
+        // } 
     } 
 };
 
@@ -182,6 +207,10 @@ const showPlan = () => {
     planDiv.classList.remove('hidden');
     startButton.style.display = 'none';
 };
+
+const createModal = () => {
+
+}
 
 headline.textContent = getDay();
 tagline.textContent = `Hey ${myName}, click the button below to see your weekly meal planner.`;
