@@ -5,7 +5,7 @@ const tagline = document.querySelector('.tagline');
 const startButton = document.getElementById('startButton');
 const planDiv = document.querySelector('.plan');
 const mealList = document.getElementById('meals');
-const name = `Bert Witzel`; 
+const myName = `Bert Witzel`; 
 const meals = [
     {
         name: 'Tuna Casserole',
@@ -150,16 +150,41 @@ const meals = [
 ]; 
 
 // HELPER FUNCTIONS
-const getDay = () => {};
+const getDay = () => {
+    const today = new Date;
+    const day = today.getDay();
+    const dayLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return dayLong[day];
+};
 
-const getRandomWeeklyMeals = () => {};
+const getRandomWeeklyMeals = () => {
+    const randomMeal = meals[Math.floor(Math.random() * meals.length)];
+    return randomMeal.name;
+};
 
-const displayWeeklyMealPlan = () => {};
+const displayWeeklyMealPlan = () => {
+    for (let i = 0; i < 7; i++) {
+        const meal = getRandomWeeklyMeals();
+        const li = document.createElement('li');
+        li.innerHTML = meal;
+        li.className = 'meal-item';
+        mealList.appendChild(li);
+    } 
+};
 
-const showPlan = () => {};
+const showPlan = () => {
+    displayWeeklyMealPlan();
+    headline.classList.add('slideUp');
+    headline.style.marginBottom = '0';
+    headline.style.fontSize = '3em';
+    tagline.textContent = `Here's your weekly meal plan!`;
+    tagline.style.marginTop = '0';
+    planDiv.classList.remove('hidden');
+    startButton.style.display = 'none';
+};
 
 headline.textContent = getDay();
-tagline.textContent = `Hey ${name}, click the button below to see your weekly meal planner.`;
+tagline.textContent = `Hey ${myName}, click the button below to see your weekly meal planner.`;
 
 // EVENT LISTENERS
 startButton.addEventListener('click', showPlan);

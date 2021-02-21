@@ -62,7 +62,7 @@ ul li {
 =========================================== */
 
 .slideUp {
-  transform: translateY(-70px);
+  transform: translateY(-40px);
   transition: transform .5s;
 }
 .hidden {
