@@ -27,15 +27,15 @@ main {
   margin-bottom: 20px;
   border: 2px solid white;
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 1px 2px 3px 1px rgba(255,255,255,.4);
+  border-radius: 10px;
   cursor: pointer;
-  transition: background .3s, color .3s;
+  transition: background .3s, color .3s, letter-spacing .7s;
 }
 
 #meals li:hover {
   color: #1e6cc5;
   background: white;
+  letter-spacing: 2px;
 }
 
 #meals li:active {
@@ -87,7 +87,7 @@ hr {
 .modal {
   position: fixed;
   z-index: 1;
-  background-color: rgba(0,0,0,.4);
+  background-color: #418de4;
   left: 0;
   top: 0;
   width: 100%;
@@ -106,6 +106,7 @@ hr {
   padding: 1.25em;
   max-width: 500px;
   background-color: #1e6cc5;
+  border-radius: 10px;
   position: relative;
   text-align: left;
   list-style-position: inside;
@@ -121,14 +122,15 @@ ol {
 }
 ol li {
   counter-increment: steps;
+  padding-bottom: .625em;
 }
 ol li::before {
   content: counter(steps);
   margin-right: 0.5rem;
   background: #ff6f00;
   color: white;
-  width: 1.2em;
-  height: 1.2em;
+  width: 1.5em;
+  height: 1.5em;
   border-radius: 50%;
   display: inline-grid;
   place-items: center;
