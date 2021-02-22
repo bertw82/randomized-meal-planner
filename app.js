@@ -6,6 +6,7 @@ const startButton = document.getElementById('startButton');
 const planDiv = document.querySelector('.plan');
 const mealList = document.getElementById('meals');
 const myName = `Bert Witzel`; 
+const myModal = document.getElementById('myModal');
 const meals = [
     {
         name: 'Tuna Casserole',
@@ -66,7 +67,7 @@ const meals = [
         index: 2
     },
     {
-        name: 'Hamburger',
+        name: 'Hamburgers',
         ingredients: [
             '1 lb ground beef',
             'Herbs and spices',
@@ -173,27 +174,10 @@ const displayWeeklyMealPlan = () => {
     for (let i = 0; i < 7; i++) {
         const meal = getRandomWeeklyMeals();
         const liMain = document.createElement('li');
-        // const ul1 = document.createElement('ul');
-        // const ul2 = document.createElement('ul');
-        // ul1.className = 'hidden';
-        // ul2.className = 'hidden';
-   
         liMain.setAttribute('data-index', meal.index);
         liMain.innerHTML = meal.name;
         liMain.className = 'meal-item';
         mealList.appendChild(liMain);
-        // liMain.appendChild(ul1);
-        // liMain.appendChild(ul2);
-        // for (let i = 0; i < meal.ingredients.length; i++) {
-        //     const liSecondary = document.createElement('li');
-        //     liSecondary.innerHTML = meal.ingredients[i];
-        //     ul1.appendChild(liSecondary);
-        // }
-        // for (let i = 0; i < meal.instructions.length; i++) {
-        //     const liSecondary = document.createElement('li');
-        //     liSecondary.innerHTML = meal.instructions[i];
-        //     ul2.appendChild(liSecondary);
-        // } 
     } 
 };
 
@@ -208,8 +192,33 @@ const showPlan = () => {
     startButton.style.display = 'none';
 };
 
-const createModal = () => {
-
+const createModal = (index) => {
+    const recipe = meals[index];
+    const h1 = document.createElement('h1');
+    h1.textContent = recipe.name;
+    const span = document.createElement('span');
+    span.innerHTML = '&times;';
+    span.className = 'close';
+    const ul = document.createElement('ul');
+    const ol = document.createElement('ol');
+    ul.className = 'modal-content';
+    myModal.appendChild(ul);
+    ul.appendChild(h1);
+    ul.appendChild(span);
+    for (let i = 0; i < recipe.ingredients.length; i++) {
+        const li = document.createElement('li');
+        li.innerHTML = recipe.ingredients[i];
+        ul.appendChild(li);
+    }
+    const line = document.createElement('hr');
+    ul.appendChild(line);
+    ul.appendChild(ol);
+    for (let i = 0; i < recipe.instructions.length; i++) {
+        const li = document.createElement('li');
+        li.innerHTML = recipe.instructions[i];
+        ol.appendChild(li);
+    } 
+    myModal.classList.remove('hidden');
 }
 
 headline.textContent = getDay();
@@ -218,4 +227,17 @@ tagline.textContent = `Hey ${myName}, click the button below to see your weekly 
 // EVENT LISTENERS
 startButton.addEventListener('click', showPlan);
 
+mealList.addEventListener('click', e => {
+    if (e.target !== mealList) {
+        const recipe = e.target.closest(".meal-item");
+        const index = recipe.getAttribute('data-index');
+        createModal(index);
+    }
+});
 
+myModal.addEventListener('click', e => {
+    const closeButton = document.querySelector('.close');
+    if (e.target === closeButton) {
+        myModal.classList.add('hidden');
+    }
+});

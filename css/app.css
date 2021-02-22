@@ -4,7 +4,9 @@
 
 * {
   box-sizing: border-box;
+  line-height: 1.6;
 }
+
 body {
   background: #1e6cc5;
   color: white;
@@ -15,12 +17,29 @@ body {
 main {
   text-align: center;
 }
-ul {
+#meals {
   list-style: none;
   padding-left: 0;
+  max-width: 450px;
+  margin: 0 auto;
 }
-ul li {
+#meals li {
   margin-bottom: 20px;
+  border: 2px solid white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 1px 2px 3px 1px rgba(255,255,255,.4);
+  cursor: pointer;
+  transition: background .3s, color .3s;
+}
+
+#meals li:hover {
+  color: #1e6cc5;
+  background: white;
+}
+
+#meals li:active {
+  box-shadow: none;
 }
 
 /* ========================================
@@ -56,6 +75,76 @@ ul li {
   background: #418de4;
   border-color: transparent;
 }
+hr {
+  color: white;
+  margin: 20px 0;
+}
+
+/* ========================================
+  Modal Classes
+=========================================== */
+
+.modal {
+  position: fixed;
+  z-index: 1;
+  background-color: rgba(0,0,0,.4);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.modal h1 {
+  font-family: 'Courgette', sans-serif;
+  top: 5px;
+  margin: 0;
+  padding-bottom: .625em;
+}
+
+.modal-content {
+  margin: 5%;
+  padding: 1.25em;
+  max-width: 500px;
+  background-color: #1e6cc5;
+  position: relative;
+  text-align: left;
+  list-style-position: inside;
+}
+.modal-content ::marker {
+  color: #ff6f00;
+}
+
+ol {
+  list-style: none;
+  counter-reset: steps;
+  padding-left: 0;
+}
+ol li {
+  counter-increment: steps;
+}
+ol li::before {
+  content: counter(steps);
+  margin-right: 0.5rem;
+  background: #ff6f00;
+  color: white;
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  line-height: 1.2em;
+}
+
+/* close button */
+.close {
+  cursor: pointer;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  position: absolute;
+  right: 10px;
+  top: -5px;
+}
 
 /* ========================================
   Helper Classes
@@ -66,6 +155,9 @@ ul li {
   transition: transform .5s;
 }
 .hidden {
+  display: none;
+}
+.hide {
   display: none;
 }
 
@@ -83,6 +175,9 @@ ul li {
   }
   .tagline {
     font-size: 1.15em;
+  }
+  .modal-content {
+    margin: 5% auto;
   }
 }
 
