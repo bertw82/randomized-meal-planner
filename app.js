@@ -9,7 +9,7 @@ const myName = `Bert`;
 const myModal = document.getElementById('myModal');
 
 // meals from wikibooks.org
-const meals = [
+const meals = [ 
     {
         name: 'Tuna Casserole',
         ingredients: [
@@ -230,11 +230,30 @@ const getRandomWeeklyMeals = () => {
 
 // function to create weekly meal plan
 const displayWeeklyMealPlan = () => {
+    // iife to get days of the week
+    const days = (function day() {
+        const dayArray = [];
+        var day = new Date();
+        var week = new Array(
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        );
+        for (i = 0; i < 7; i++) {
+          dayArray.push(week[(day.getDay() + i) % 7]);
+        }
+        return dayArray;
+    })();
+    // loop through meals and get random meal
     for (let i = 0; i < 7; i++) {
         const meal = getRandomWeeklyMeals();
         const liMain = document.createElement('li');
         liMain.setAttribute('data-index', meal.index);
-        liMain.innerHTML = meal.name;
+        liMain.innerHTML = `${days[i]} - ${meal.name}`;
         liMain.className = 'meal-item';
         mealList.appendChild(liMain);
     } 

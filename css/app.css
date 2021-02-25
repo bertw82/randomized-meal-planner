@@ -29,13 +29,12 @@ main {
   padding: 20px;
   border-radius: 10px;
   cursor: pointer;
-  transition: background .3s, color .3s, letter-spacing .7s;
+  transition: background .3s, color .3s;
 }
 
 #meals li:hover {
   color: #1e6cc5;
   background: white;
-  letter-spacing: 2px;
 }
 
 #meals li:active {
@@ -115,6 +114,7 @@ hr {
   color: #ff6f00;
 }
 
+/* list styling from Chris Coyier codepen: https://codepen.io/chriscoyier/pen/wvKeQOp */
 ol {
   list-style: none;
   counter-reset: steps;
@@ -170,6 +170,11 @@ ol li::before {
 /* ========================================
   Media Queries
 =========================================== */
+@media (min-width: 576px) {
+  .modal-content {
+    margin: 5% auto;
+  }
+}
 
 @media (min-width: 768px) {
   .headline {
@@ -177,9 +182,6 @@ ol li::before {
   }
   .tagline {
     font-size: 1.15em;
-  }
-  .modal-content {
-    margin: 5% auto;
   }
 }
 
